@@ -13,3 +13,10 @@ includeで出力元を指定
 compilerOptions.outDirで出力先を指定
 
  "declaration": trueにすると型定義ファイルが生成される
+ 
+```
+"allowJs": true
+"checkJs": true
+```
+
+でjsファイルをビルドに含むことができる
