@@ -8,3 +8,6 @@ noImplicitAny; falseでanyを許容
 
 strictNullChecks: falseでnullチェックをオフに
 (nullかもしれない安全に扱うのがTypeScriptの目的の1つのためエラーを回避するためだけに使ってはいけない)
+
+includeで出力元を指定  
+compilerOptions.outDirで出力先を指定
