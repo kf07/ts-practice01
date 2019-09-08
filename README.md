@@ -139,5 +139,5 @@ interface Box<T = string> {
 ```typescript
 const box0: Box = { value: 'test' } //初期Genericsを指定しているためstringのときは省略可
 const box1: Box<string> = { value: 'test'}
-const box2: Box<number> = { value: 2 }
+const box2: Box<number> = { value: 2 } //指定すればstring以外にもできる
 ```
