@@ -127,3 +127,17 @@ const box1: Box<string> = { value: 'test'}
 const box2: Box<number> = { value: 1 }
 const box3: Box<boolean> = { value: true }
 ```
+
+初期Genericsを指定することができる  
+指定している場合はGenericsを省略することができる
+```typescript
+interface Box<T = string> {
+  value: T
+}
+```
+
+```typescript
+const box0: Box = { value: 'test' } //初期Genericsを指定しているためstringのときは省略可
+const box1: Box<string> = { value: 'test'}
+const box2: Box<number> = { value: 2 }
+```
