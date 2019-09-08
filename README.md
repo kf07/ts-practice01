@@ -229,6 +229,33 @@ const value3 = pick(obj, 'age'); //存在しないプロパティ名のためエ
 ```
 
 #### ClassのGenerics
+
+constructorの引数を制約できる  
+以下の例ではT extends PersonPropsが指定されている  
 ```typescript
+interface PersonProps {
+  name: string
+  age: number
+  gender: 'male' | 'female' | 'other'
+}
+
+class Person<T extends PersonProps> {
+  name: T['name']
+  age: T['age']
+  gender: T['gender']
+  constructor (props: T) {
+    this.name = props.name
+    this.age = props.age
+    this.gender = props.gender
+  }
+}
+
+const person = new Person({
+  name: 'Taro',
+  age: 28,
+  gender: 'male'
+})
+
+console.log(person);
 
 ```

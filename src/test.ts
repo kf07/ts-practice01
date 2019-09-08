@@ -53,17 +53,27 @@ const creature = new Creature(0,4)
 
 console.log(creature.numberOfHands)
 
-
-
-function pick<T, K extends keyof T>(props: T, key: K) {
-  return props[key]
+interface PersonProps {
+  name: string
+  age: number
+  gender: 'male' | 'female' | 'other'
 }
 
-const obj = {
+class Person<T extends PersonProps> {
+  name: T['name']
+  age: T['age']
+  gender: T['gender']
+  constructor (props: T) {
+    this.name = props.name
+    this.age = props.age
+    this.gender = props.gender
+  }
+}
+
+const person = new Person({
   name: 'Taro',
-  amount: 0,
-  flag: false
-};
-const value1 = pick(obj, 'name');
-const value2 = pick(obj, 'flag');
-const value3 = pick(obj, 'age'); //存在しないプロパティ名のためエラー
+  age: 28,
+  gender: 'male'
+})
+
+console.log(person);
