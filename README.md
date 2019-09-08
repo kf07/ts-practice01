@@ -167,6 +167,12 @@ function boxed<T>(props: T) {
 Genericsを指定していなくてもエラーにはならない  
 引数に与えられた値から型推論を得ることができる
 ```typescript
-const box0 = boxed('test'); //const box01: {value: string}
-const box1 = boxed(0); //const box02: {value: number}
+const box0 = boxed('test'); //{value: string}
+const box1 = boxed(0); //{value: number}
+```
+
+#### アサーションによる明示的な型の付与
+Nullable型などを直接適用したい場合、宣言時にアサーションを付与
+```typescript
+const box2 = boxed(false as boolean | null); //{value: boolean| null}
 ```

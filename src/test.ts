@@ -58,6 +58,6 @@ function boxed<T>(props: T) {
   return { value: props}
 }
 
-const box0 = boxed('test');
-const box1 = boxed(0);
+const box2 = boxed(false as boolean | null);
+
 
