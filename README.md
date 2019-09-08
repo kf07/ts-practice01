@@ -61,3 +61,55 @@ tsc -b
 tsc -b --watch
 ```
 コマンドで監視して自動ビルド
+
+
+### includeとexclude
+includeでインクルードされたファイルはexcludeでフィルタリングできる  
+例
+```
+  "include": [
+    "src/**/*"
+  ],
+  "exclude": [
+    "src/test.ts"
+    "node_modules"
+  ]
+```
+にするとsrcディレクトリのtest.tsのみビルドから除外される  
+exclude"プロパティを指定していない場合は、 
+デフォルトでnode_modules、bower_components、jspm_packagesとoutDirで指定されたディレクトリが除外されます。
+なのでexcludeを使用している場合はnode_modules等も指定が必要になる
+
+
+### extends
+extendsで別ファイルから構成を継承できる  
+extendsした値は継承ファイルによって設定をオーバーライドされる
+
+
+### keyof
+
+keyofはオブジェクトのkey名のユニオン型になる
+
+```typescript
+interface Person {
+  name: string;
+  age: number;
+  hobby: string;
+}
+
+type PersonKey = keyof Person; //PersonKey = "name" | "age" | "hobby"と同じ
+
+const Boy: Person= {
+  name: '太郎',
+  age: 12,
+  hobby: 'baseball'
+};
+
+const getPerson = (obj: Person, key: PersonKey) => obj[key]
+
+const x = getPerson(Boy, 'name');
+
+console.log(x);
+```
+### Generics
+
