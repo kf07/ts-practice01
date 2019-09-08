@@ -52,14 +52,12 @@ console.log(dog)
 const creature = new Creature(0,4)
 
 console.log(creature.numberOfHands)
-//
-// interface Box<T> {
-//   value: T
-// }
-interface Box<T = string> {
-  value: T
+
+
+function boxed<T>(props: T) {
+  return { value: props}
 }
 
-const box0: Box = { value: 'test' }
-const box1: Box<string> = { value: 'test'}
-const box2: Box<number> = { value: 2 }
+const box0 = boxed('test');
+const box1 = boxed(0);
+

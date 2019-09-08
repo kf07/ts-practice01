@@ -141,3 +141,32 @@ const box0: Box = { value: 'test' } //初期Genericsを指定しているためs
 const box1: Box<string> = { value: 'test'}
 const box2: Box<number> = { value: 2 } //指定すればstring以外にもできる
 ```
+
+extendsで指定可能な型を制限する
+```typescript
+interface Box<T extends string | number> {
+  value: T
+}
+```
+
+```typescript
+const box0: Box = { value: 'test' } //Genericsを指定していないためエラー
+const box1: Box<string> = { value: 'test'}
+const box2: Box<number> = { value: 1 }
+const box3: Box<boolean> = { value: true } //string,number型以外を指定しているためエラー
+```
+
+
+#### 関数のGenerics
+```typescript
+function boxed<T>(props: T) {
+  return { value: props}
+}
+```
+
+Genericsを指定していなくてもエラーにはならない  
+引数に与えられた値から型推論を得ることができる
+```typescript
+const box0 = boxed('test'); //const box01: {value: string}
+const box1 = boxed(0); //const box02: {value: number}
+```
