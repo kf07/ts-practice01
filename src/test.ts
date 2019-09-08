@@ -54,16 +54,16 @@ const creature = new Creature(0,4)
 console.log(creature.numberOfHands)
 
 
-interface Props {
-  amount: number
+
+function pick<T, K extends keyof T>(props: T, key: K) {
+  return props[key]
 }
 
-function boxed<T extends Props>(props: T) {
-  return { value: props.amount.toFixed(2) }
-}
-
-const box1 = boxed({amount: 0}) //0.00
-const box2 = boxed({amount: 1.3333}) //1.33
-const box3 = boxed({value: 0}) //Props型を満たしていない
-const box4 = boxed({ amount: 'test' }) //amountがnumber型じゃない
-
+const obj = {
+  name: 'Taro',
+  amount: 0,
+  flag: false
+};
+const value1 = pick(obj, 'name');
+const value2 = pick(obj, 'flag');
+const value3 = pick(obj, 'age'); //存在しないプロパティ名のためエラー

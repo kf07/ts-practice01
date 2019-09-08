@@ -209,3 +209,26 @@ const box2 = boxed(false as boolean | null); //{value: boolean| null}
 ```
 
 #### 複数のGenerics
+第２引数のGenericsを、第１引数の Genericsと関連づけることができる  
+第２引数に付与されたK型は、第１引数のプロパティ名称であることが確約される  
+そのため、`props[key]`が必ず存在する値であることが保証される
+
+```typescript
+function pick<T, K extends keyof T>(props: T, key: K) {
+  return props[key]
+}
+
+const obj = {
+  name: 'Taro',
+  amount: 0,
+  flag: false
+};
+const value1 = pick(obj, 'name');
+const value2 = pick(obj, 'flag');
+const value3 = pick(obj, 'age'); //存在しないプロパティ名のためエラー
+```
+
+#### ClassのGenerics
+```typescript
+
+```
