@@ -188,6 +188,10 @@ const box2 = boxed('test')
 
 props.amountがnumber型であることが確約されているためtoFixed関数を実行できる
 ```typescript
+interface Props {
+  amount: number
+}
+
 function boxed<T extends Props>(props: T) {
   return { value: props.amount.toFixed(2) }
 }
