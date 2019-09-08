@@ -113,3 +113,17 @@ console.log(x);
 ```
 ### Generics
 
+
+```typescript
+interface Box<T> {
+  value: T
+}
+```
+変数宣言するときに型を指定する  
+指定していない場合はエラー
+```typescript
+const box0: Box = { value: 'test' } //Genericsを指定していないためエラー
+const box1: Box<string> = { value: 'test'} 
+const box2: Box<number> = { value: 1 }
+const box3: Box<boolean> = { value: true }
+```
