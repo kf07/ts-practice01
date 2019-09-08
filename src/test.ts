@@ -54,10 +54,16 @@ const creature = new Creature(0,4)
 console.log(creature.numberOfHands)
 
 
-function boxed<T>(props: T) {
-  return { value: props}
+interface Props {
+  amount: number
 }
 
-const box2 = boxed(false as boolean | null);
+function boxed<T extends Props>(props: T) {
+  return { value: props.amount.toFixed(2) }
+}
 
+const box1 = boxed({amount: 0}) //0.00
+const box2 = boxed({amount: 1.3333}) //1.33
+const box3 = boxed({value: 0}) //Props型を満たしていない
+const box4 = boxed({ amount: 'test' }) //amountがnumber型じゃない
 

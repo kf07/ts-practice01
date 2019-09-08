@@ -162,6 +162,10 @@ const box3: Box<boolean> = { value: true } //string,number型以外を指定し�
 function boxed<T>(props: T) {
   return { value: props}
 }
+
+//or
+
+const boxed = <T>(props: T) => ({ value: props })
 ```
 
 Genericsを指定していなくてもエラーにはならない  
@@ -171,8 +175,33 @@ const box0 = boxed('test'); //{value: string}
 const box1 = boxed(0); //{value: number}
 ```
 
+変数と同様にextendsを指定することで指定可能な型を制約することができる
+
+```typescript
+function boxed<T extends string>(props: T) {
+  return { value: props }
+}
+
+const box1 = boxed(0); //エラー
+const box2 = boxed('test')
+```
+
+props.amountがnumber型であることが確約されているためtoFixed関数を実行できる
+```typescript
+function boxed<T extends Props>(props: T) {
+  return { value: props.amount.toFixed(2) }
+}
+
+const box1 = boxed({amount: 0}) //0.00
+const box2 = boxed({amount: 1.3333}) //1.33
+const box3 = boxed({value: 0}) //Props型を満たしていない
+const box4 = boxed({ amount: 'test' }) //amountがnumber型じゃない
+```
+
 #### アサーションによる明示的な型の付与
 Nullable型などを直接適用したい場合、宣言時にアサーションを付与
 ```typescript
 const box2 = boxed(false as boolean | null); //{value: boolean| null}
 ```
+
+#### 複数のGenerics
