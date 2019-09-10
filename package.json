@@ -1,0 +1,25 @@
+{
+  "name": "ts-practice01",
+  "version": "1.0.0",
+  "description": "strict: trueで型の厳密さを一括指定",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "watch": "tsc -b --watch",
+    "dev": "node dist/test.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/kf07/ts-practice01.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/kf07/ts-practice01/issues"
+  },
+  "homepage": "https://github.com/kf07/ts-practice01#readme",
+  "dependencies": {
+    "@types/lodash": "^4.14.137"
+  }
+}
