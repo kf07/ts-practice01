@@ -77,3 +77,15 @@ const person = new Person({
 })
 
 console.log(person);
+
+const animals = ['dog','cat']
+const numbers = [1,2,3,4,5]
+
+const myFilter = <T>(arr:T[],key:T):T[] => {
+  return arr.filter((value:T) => {
+    return value === key
+  });
+}
+
+console.log(myFilter(animals,'cat'))
+console.log(myFilter(numbers,2))
