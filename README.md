@@ -303,3 +303,43 @@ const PersonList = myMap(Person,'age')  //[ 'Taro', 'Hanako', 'Tetsuya' ]
 const PersonHobby = myMap(Person, "hobby") //エラー
 console.log(PersonList)
 ```
+
+
+### ConditionalTypes
+T型によって型の制約を分けることができる  
+
+以下の場合はTがstringだった場合はtrue,それ意外だった場合はfalseの型になる
+```typescript
+type IsString<T> = T extends string ? true : false
+type X = IsString<'test'>
+type Y = IsString<0>
+
+const a:X = true
+const a:X = false //エラー
+
+const b:Y = true //エラー
+const b:Y = false
+
+
+  
+```
+
+
+IsType型を使用して型を変換する  
+U型に一致するプロパティをtrue型に変換する
+```typescript
+interface Properties {
+  name: string
+  age: number
+  flag: boolean
+}
+
+type IsType<T, U> = {
+  [K in keyof T]: T[K] extends U ? true : false
+}
+
+type IsString = IsType<Properties, string>  //nameがtrue型になる
+type IsNumber = IsType<Properties, number>  //ageがtrue型になる
+type IsBoolean = IsType<Properties, boolean> //flagがtrue型になる
+```
+
