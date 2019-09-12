@@ -259,3 +259,47 @@ const person = new Person({
 console.log(person);
 
 ```
+
+「Generics」配列とプロパティを指定して、指定したプロパティで配列を作る関数を作ってみる
+
+interfaceでオブジェクトの型を指定  
+配列PersonをPersonPropsの型を使って作成  
+`<T, K extends keyof T>`を使うことで引数で指定した配列にあるプロパティしか指定できなくなる
+配列Personにはname,age,genderがあるので、それ以外を第２引数に指定しようとするとエラーになる
+```typescript
+
+interface PersonProps {
+  name: string
+  age: number
+  gender: 'male' | 'female' | 'other'
+}
+
+
+const Person:PersonProps[] = [
+  {
+    name: 'Taro',
+    age: 20,
+    gender: 'male'
+  },
+  {
+    name: 'Hanako',
+    age: 23,
+    gender: 'female',
+  },
+  {
+    name: 'Tetsuya',
+    age: 24,
+    gender: 'male'
+  }
+]
+
+const myMap = <T, K extends keyof T>(props: T[], key: K):T[K][] => {
+  return props.map((value:T) => {
+    return value[key]
+  })
+}
+
+const PersonList = myMap(Person,'age')  //[ 'Taro', 'Hanako', 'Tetsuya' ]
+const PersonHobby = myMap(Person, "hobby") //エラー
+console.log(PersonList)
+```

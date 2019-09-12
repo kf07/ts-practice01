@@ -53,30 +53,30 @@ const creature = new Creature(0,4)
 
 console.log(creature.numberOfHands)
 
-interface PersonProps {
-  name: string
-  age: number
-  gender: 'male' | 'female' | 'other'
-}
+// interface PersonProps {
+//   name: string
+//   age: number
+//   gender: 'male' | 'female' | 'other'
+// }
 
-class Person<T extends PersonProps> {
-  name: T['name']
-  age: T['age']
-  gender: T['gender']
-  constructor (props: T) {
-    this.name = props.name
-    this.age = props.age
-    this.gender = props.gender
-  }
-}
+// class Person<T extends PersonProps> {
+//   name: T['name']
+//   age: T['age']
+//   gender: T['gender']
+//   constructor (props: T) {
+//     this.name = props.name
+//     this.age = props.age
+//     this.gender = props.gender
+//   }
+// }
 
-const person = new Person({
-  name: 'Taro',
-  age: 28,
-  gender: 'male'
-})
+// const person = new Person({
+//   name: 'Taro',
+//   age: 28,
+//   gender: 'male'
+// })
 
-console.log(person);
+// console.log(person);
 
 const animals = ['dog','cat']
 const numbers = [1,2,3,4,5]
@@ -89,3 +89,37 @@ const myFilter = <T>(arr:T[],key:T):T[] => {
 
 console.log(myFilter(animals,'cat'))
 console.log(myFilter(numbers,2))
+
+interface PersonProps {
+  name: string
+  age: number
+  gender: 'male' | 'female' | 'other'
+}
+
+
+const Person:PersonProps[] = [
+  {
+    name: 'Taro',
+    age: 20,
+    gender: 'male'
+  },
+  {
+    name: 'Hanako',
+    age: 23,
+    gender: 'female',
+  },
+  {
+    name: 'Tetsuya',
+    age: 24,
+    gender: 'male'
+  }
+]
+
+const myMap = <T, K extends keyof T>(props: T[], key: K):T[K][] => {
+  return props.map((value:T) => {
+    return value[key]
+  })
+}
+
+const PersonList = myMap(Person,'age')
+console.log(PersonList)
