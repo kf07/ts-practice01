@@ -127,14 +127,47 @@ console.log(PersonList)
 interface Properties {
   name: string
   age: number
-  flag: boolean
+  walk: () => void
+  jump: () => Promise<void>
 }
 
-type IsType<T, U> = {
-  [K in keyof T]: T[K] extends U ? true : false
+type Filter<T, U> = {
+  [K in keyof T]: T[K] extends U ? K : never
+}[keyof T]
+
+type StringKeys<T> = Filter<T, string>
+type Strings = Pick<Properties, StringKeys<Properties>>
+
+
+interface DeepNest {
+  deep: {
+    nest: string
+  }
 }
 
-type IsString = IsType<Properties, string>
-type IsNumber = IsType<Properties, number>
-type IsBoolean = IsType<Properties, boolean>
+interface ShallowNest {
+  shallow: { value: string }
+}
+
+interface Properties {
+  deep: DeepNest
+  Shallow: ShallowNest
+}
+
+type Salvage<T extends DeepNest> = T['deep']['nest']['value']
+type DeepDive<T> = {
+  [K in keyof T]: T[K] extends DeepNest ? Salvage<T[K]> : never
+}[keyof T]
+type X = DeepDive<Properties>
+
+// function greet() {
+//   return `123`
+// }
+//
+// type Return<T> = T extends (...arg: any[]) => infer U ? U : never
+// type R = Return<typeof greet>
+
+function greet(name: string, age: number) {
+  return `Hello! Im ${name}. ${age} years old`
+}
 

@@ -343,3 +343,7 @@ type IsNumber = IsType<Properties, number>  //ageがtrue型になる
 type IsBoolean = IsType<Properties, boolean> //flagがtrue型になる
 ```
 
+
+- K = key
+- T = 型
+- 
